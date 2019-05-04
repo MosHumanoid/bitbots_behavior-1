@@ -7,10 +7,9 @@ from tf2_geometry_msgs import PointStamped
 
 class BallFilter(object):
     def __init__(self):
-        self.time_threshold = 1.0
-        self.drift_threshold = 400
-        self.distance_threshold = 20
-        self.match_count_threshold = 0.5
+        self.time_threshold = 5.0
+        self.drift_threshold = 0.5
+        self.match_count_threshold = 0.2
         self.ball_queue = []
         rospy.init_node('ball_filter')
 
@@ -28,6 +27,8 @@ class BallFilter(object):
             'ball_relative_filtered',
             BallRelative,
             queue_size=1)
+
+        rospy.spin()
 
     def get_ball_position_uv(self, ball):
         try:
@@ -53,11 +54,11 @@ class BallFilter(object):
         message = BallRelative()
         message.header.frame_id = 'base_footprint'
         message.ball_relative.x = ball[0]
-        message.ball_relative.x = ball[1]
+        message.ball_relative.y = ball[1]
         self.pub_ball_relative_filtered.publish(message)
 
     def ball_valid(self, current_ball):
-        current_time = self.ball_queue[2]
+        current_time = current_ball[2]
         matched = []
         for ball in self.ball_queue:
             distance = math.sqrt((current_ball[0] - ball[0]) ** 2 + (current_ball[1] - ball[1]) ** 2)

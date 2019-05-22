@@ -50,8 +50,8 @@ $BallSeen
 
 #NoLocalizationGoalieBehavior
 $BallSeen
-    YES --> $BallDangerous
-        YES --> #GoAndKickBall + target:detection_goal
+    YES --> $
+        YES --> #GoAndKickBall // is this + target:detection_goal necessary? (no target in kick_ball)
         NO --> @LookAtBall
     NO --> @SearchBall
 
@@ -59,8 +59,8 @@ $BallSeen
 -->BodyBehavior
 $RoleDecider
     goalie --> $GameStateDecider
-        Initial --> @Stand, @LookAtFieldFeatures
-        Ready --> @GoToRolePosition, @LookAtFieldFeatures
+        Initial --> @Stand, @LookAtFieldFeatures //lookAt is unnecessary
+        Ready --> @GoToRolePosition, @LookAtFieldFeatures //lookAt is unnecessary
         Set --> @Stand
         Playing --> #GoalieBehavior
         Finished --> @Stand

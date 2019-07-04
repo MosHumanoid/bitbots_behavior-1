@@ -19,9 +19,7 @@ $BallKickArea
 #NoLocalizationPlayerBehavior
 $BallSeen
     YES --> $BallClose
-        YES --> $GoalSeen
-            YES --> #GoAndKickBallDetectionGoal
-            NO --> @Stop, @SearchGoal
+        YES --> #GoAndKickBallAway
         NO --> @GoToBall + target:none
     NO --> @Stop, @SearchBall
 

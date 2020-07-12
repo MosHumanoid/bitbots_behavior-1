@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 """
 BehaviorModule
@@ -14,7 +14,7 @@ import rospy
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from tf2_geometry_msgs import PoseStamped
 from humanoid_league_msgs.msg import BallRelative, GameState, HeadMode, Strategy, TeamData,\
-    PlayAnimationAction, GoalPartsRelative, RobotControlState
+    PlayAnimationAction, RobotControlState
 from move_base_msgs.msg import MoveBaseActionFeedback
 from actionlib_msgs.msg import GoalID
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
     # TODO: callbacks away from the blackboard!
     rospy.Subscriber("ball_relative", BallRelative, D.blackboard.world_model.ball_callback)
-    rospy.Subscriber("goal_parts_relative", GoalPartsRelative, D.blackboard.world_model.goal_parts_callback)
+#    rospy.Subscriber("goal_parts_relative", GoalPartsRelative, D.blackboard.world_model.goal_parts_callback)
     rospy.Subscriber("gamestate", GameState, D.blackboard.gamestate.gamestate_callback)
     rospy.Subscriber("team_data", TeamData, D.blackboard.team_data.team_data_callback)
     rospy.Subscriber("amcl_pose", PoseWithCovarianceStamped, D.blackboard.world_model.position_callback)
